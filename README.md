@@ -1,2 +1,2 @@
-# JAVA
-Curso de Java
+# Java
+## Curso de Java
