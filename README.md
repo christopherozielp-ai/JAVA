@@ -29,7 +29,39 @@ Aunque Kotlin es el lenguaje recomendado por Google para el desarrollo de aplica
 ### loT (internet of Things / internet de las cosas)
 Gracias a su portabilidad y bajo consumo de recursos java se utiliza en dispositivos embebidos, sensores inteligentes o sistemas de control en tiempo real plataformas como java ME y Eclipse IoT lo hacen apto par este tipo de soluciones
 
-## ¿Que es la JVM?
+## Versiones de java
+Existen varias versiones de java cada una con sus propias caracteristicas y mejoras
+ 
+#### java SE (Standard Edition)
+ Es la mas basica de java con todo lo necesario para crear aplicaiones de escritorio, librerias, logica de negocio, herramineta de linea de comandos, etc.
+
+#### java EE (Enterprise Edition)
+ Extiende java SE con funcionalesdades para el desarrollo empresarial como:
+
+ + servlets
+ + EJB (Enterprise JavaBeans)
+ + Web Services
+ + Seguridad Avanzada
+ + Manejo de transacciones
+ 
+ #### JDK (Java Development Kit)
+ Es el paquete completo para desarrollo incluye
+ + Compilador (javac)
+ + La maquina virtual (JVM)
+ + Herramienta de desarrollo y depuracion
+
+ #### JRE (Java Runtime Environment)
+ Es el paquete que incluye la JVM y las librerias necesarias para ejecutar aplicaciones java
+
+ #### Oracle JDK
+ Es la version de java desarrollada por Oracle es la version mas completa y actualizada de java
+
+ #### OpenJDK
+ Es una version de java de codigo abierto desarrollada por la comunidad es una version gratuita y de codigo abierto de java
+
+
+
+ ## ¿Que es la JVM?
 Java es un lenguaje de programacion conocido por su principio de "Escribe una vez, ejecuta en cualquier lugar" (Write once, run anywhere) esto significa que un programa compilado en una plataforma puede ser ejecutado en cualquier otra plataforma que tenga una JVM instalada esto se debe a que java no se compila a codigo maquina sino a bytecode que es un codigo intermedio que puede ser ejecutado por la JVM
 
 La JVM (Java Virtual Machine) es una maquina virtual que se encarga de ejecutar el bytecode de java, la JVM es la encargada de traducir el bytecode a codigo maquina que puede ser ejecutado por la CPU de la computadora
