@@ -1,5 +1,9 @@
 # Java
 ## Curso de Java
+Java es un lenguaje de programacion conocido por su principio de "Escribe una vez, ejecuta en cualquier lugar" (Write once, run anywhere) esto significa que un programa compilado en una plataforma puede ser ejecutado en cualquier otra plataforma que tenga una JVM instalada esto se debe a que java no se compila a codigo maquina sino a bytecode que es un codigo intermedio que puede ser ejecutado por la JVM
+
+La JVM (Java Virtual Machine) es una maquina virtual que se encarga de ejecutar el bytecode de java, la JVM es la encargada de traducir el bytecode a codigo maquina que puede ser ejecutado por la CPU de la computadora
+
 ## Lenguaje Orientado a Objetos (OOP/POO)
 java esta contruido sobre el paradigma de programcion orintado a objetos lo que significa uqe todo gira en tomo a objetos, clases, herencia, pilmorfismo y encpulsamiento esto permite construir programas modulares, reutilizables y faciles de mantener 
 ## Fuenertemente tipado
