@@ -207,3 +207,12 @@ contador++;           // Ahora es 1 (sufijo: incrementa después)
 int negativo = -contador; // Ahora es -2
 ```
 
+### Cadenas de texto
+Las cadenas de texto tambien llamadas String las cadenas permiten represnetar y manipular texto lo cual es fundamental en casi cualquier aplicacion desde mostrar mensajes hasta procesar datso introducidos por el usuarios.
+
+Las cadena de texto estan en todas partes:mensajes de pantallas, nombres, correos, contraseñas, etc textos que se guardan datos que se reciben desde formularios o APIs entre muchos otros casos.
+
+Entender como funciona el string es esencial para:
++ Capturar y mostara informacion
++ Manipular texto (cortar, unir, buscar) 
++ Interactuar con el usuario o con otros sistemas
