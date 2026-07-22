@@ -216,3 +216,371 @@ Entender como funciona el string es esencial para:
 + Capturar y mostara informacion
 + Manipular texto (cortar, unir, buscar) 
 + Interactuar con el usuario o con otros sistemas
+  
+Ademas los String son objetos en java.
+
+### Métodos y Operaciones con Strings
+A continuación se muestran las operaciones y métodos más comunes al trabajar con Cadenas de Texto (basado en nuestros apuntes):
+
+#### 1. Creación y el "String Pool"
+```java
+String name = "oziel"; // Forma recomendada. Se guarda en el "String Pool" para ahorrar memoria.
+var surname = new String("Perez"); // Fuerza la creación de un nuevo objeto en memoria (Heap).
+```
+
+#### 2. Concatenación
+Se usa el operador `+` para unir dos o más textos.
+```java
+System.out.println(name + " " + surname); // Une variables y texto literal
+```
+
+#### 3. Longitud (`length()`)
+Devuelve la cantidad de caracteres que tiene el texto.
+```java
+System.out.println(name.length());
+```
+
+#### 4. Obtener Carácter (`charAt(index)`)
+Accede a un carácter específico por su posición (índice). Los índices empiezan en 0.
+```java
+System.out.println(name.charAt(4)); 
+```
+
+#### 5. Subcadenas (`substring()`)
+Extrae fragmentos de una cadena de texto.
+```java
+System.out.println(name.substring(2)); // Desde el índice 2 hasta el final
+System.out.println(name.substring(1, 3)); // Desde el índice 1 hasta el 3 (sin incluir el 3)
+```
+
+#### 6. Mayúsculas y Minúsculas (`toUpperCase()` y `toLowerCase()`)
+```java
+System.out.println(name.toUpperCase()); // Convierte todo a MAYÚSCULAS
+System.out.println(name.toLowerCase()); // Convierte todo a minúsculas
+```
+
+#### 7. Comprobar si contiene (`contains()`)
+Verifica si un texto contiene otro texto o fragmento específico. Devuelve `true` o `false`.
+```java
+System.out.println("Hola oziel".contains("oziel")); // true
+```
+
+#### 8. Comparación (`equals()` y `equalsIgnoreCase()`)
+**¡Importante!** Para comparar el contenido de dos Strings **SIEMPRE** se debe usar `.equals()`, no `==`.
+```java
+System.out.println(name.equals("oziel")); // Compara el contenido exacto
+System.out.println(name.equalsIgnoreCase("Oziel")); // Compara ignorando mayúsculas/minúsculas
+```
+
+#### 9. La diferencia entre `==` y `.equals()`
++ `==` : Compara **referencias de memoria** (¿apuntan al mismo objeto físico?).
++ `.equals()` : Compara el **contenido** (¿el texto es el mismo?).
+```java
+var a = "oziel";
+var c = new String("oziel");
+System.out.println(a == c); // false (Son objetos distintos en memoria)
+System.out.println(a.equals(c)); // true (Tienen el mismo texto)
+```
+
+#### 10. Limpiar espacios (`trim()`)
+Elimina los espacios en blanco sobrantes al principio y al final del texto (no en el medio).
+```java
+System.out.println(" Hola ".trim()); // Resultado: "Hola"
+```
+
+#### 11. Reemplazar (`replace()`)
+Cambia todas las apariciones de un carácter o texto por otro nuevo.
+```java
+System.out.println("Hola mundo".replace("mundo", "java")); // Resultado: "Hola java"
+```
+
+#### 12. Formateo de Strings (`String.format()`)
+Sirve para insertar variables dentro de un texto de forma ordenada y controlada, usando comodines como `%s` (String) y `%d` (Enteros).
+```java
+var age = 19;
+System.out.println(String.format("Hola soy %s y tengo %d años", name, age));
+```
+
+---
+
+## Estructuras de Control (Condicionales)
+
+Las estructuras de control nos permiten tomar decisiones en el código, ejecutando diferentes bloques dependiendo de ciertas condiciones o valores.
+
+### 1. Condicionales (`if` / `else if` / `else`)
+Se utilizan cuando tienes **condiciones complejas**, rangos numéricos o necesitas combinar operadores lógicos (`&&`, `||`).
+
++ **`if`**: Es la condición inicial.
++ **`else if`**: Evalúa una nueva condición si la anterior no se cumplió. Siempre va entre el `if` y el `else`.
++ **`else`**: Es el bloque por defecto que se ejecuta cuando ninguna condición anterior fue verdadera.
+
+**Ejemplo en Java:**
+```java
+var age = 15;
+
+// Esto se ejecuta de manera secuencial
+if (age > 18) {
+    System.out.println("Eres mayor de edad");
+} else if (age == 18) {
+    System.out.println("Felicidades por cumplir tus 18 años");
+} else {
+    System.out.println("Eres menor de edad");
+}
+```
+
+### 2. Condicional `switch`
+El `switch` está diseñado específicamente para evaluar **una sola variable** contra muchos **valores exactos y concretos** (como opciones de un menú, días de la semana, etc.). Hace que el código sea mucho más limpio que usar muchos `if / else if` anidados.
+
++ **`case`**: Representa cada valor exacto posible de la variable.
++ **`break`**: Es fundamental para salir del `switch` una vez que un caso se cumple. Si lo olvidas, el código seguirá ejecutando los casos de abajo.
++ **`default`**: (Opcional) Funciona como el `else`; se ejecuta si ninguno de los casos coincidió.
+
+**Ejemplo en Java:**
+```java
+var day = 3;
+
+switch (day) {
+    case 1:
+        System.out.println("Lunes");
+        break;
+    case 2:
+        System.out.println("Martes");
+        break;
+    case 3:
+        System.out.println("Miércoles");
+        break;
+    case 4:
+        System.out.println("Jueves");
+        break;
+    case 5:
+        System.out.println("Viernes");
+        break;
+    default:
+        System.out.println("No es lunes, martes, miércoles, jueves o viernes");
+}
+```
+
+---
+
+## Estructuras de Datos: Arreglos (Arrays)
+
+Un arreglo (o *array*) es una estructura de datos que nos permite almacenar **múltiples valores del mismo tipo** bajo un mismo nombre de variable. Piensa en un arreglo como una caja grande con muchos compartimentos numerados, donde en cada compartimento puedes guardar un dato.
+
+### Características principales de los Arrays en Java:
+1. **Tamaño fijo:** Una vez que creas un arreglo con un tamaño específico (ej. 20 espacios), ese tamaño **no puede cambiar**. No puedes agregar un espacio 21 más tarde ni quitarle espacios.
+2. **Índices basados en cero (0):** El primer elemento siempre se guarda en la posición `0`, el segundo en la `1`, y así sucesivamente. El último elemento siempre está en la posición `tamaño - 1`.
+3. **Tipado estricto:** Un arreglo de enteros (`int[]`) solo puede guardar números. No puedes mezclar textos (`String`) con números en el mismo arreglo.
+
+### 1. Declaración y Creación
+
+Puedes crear un arreglo especificando la cantidad de espacios que necesitas, o dándole los valores directamente si ya los conoces.
+
+```java
+// Forma 1: Especificando el tamaño (se llena con valores por defecto, ej. 0 para int)
+int[] numbers = new int[20]; 
+// Esto crea un arreglo con 20 espacios libres (del índice 0 al 19)
+
+// Forma 2: Asignando los valores directamente desde el inicio
+String[] names = {"oziel", "perez", "valente"}; 
+// Java cuenta los elementos y crea automáticamente un arreglo de 3 espacios
+```
+
+### 2. Acceso a los datos
+Para leer el valor que hay dentro de un compartimento, usas el nombre de la variable seguido de corchetes `[ ]` con el número de índice que quieres revisar.
+
+```java
+System.out.println(names[0]); // Imprime "oziel" (el primer elemento)
+System.out.println(numbers[3]); // Imprime 0 (el valor por defecto al crear el arreglo int)
+```
+
+### 3. Modificar datos
+Para cambiar o actualizar el dato que hay guardado en una posición, accedes a esa posición con los corchetes y le asignas un nuevo valor usando el signo `=`.
+
+```java
+numbers[0] = 12; // Guarda el número 12 en el primer compartimento
+numbers[19] = 19; // Guarda el número 19 en el último compartimento (20 - 1)
+
+names[2] = "weekend"; // Cambia el texto "valente" por "weekend"
+```
+
+> Ten mucho cuidado con no salirte de los límites del arreglo. Si tu arreglo tiene 20 espacios (índices 0 al 19) e intentas hacer `numbers[20] = 5;`, Java lanzará un error crítico llamado `ArrayIndexOutOfBoundsException` y tu programa se detendrá.
+
+### 4. Tamaño del arreglo (`length`)
+Si en algún momento necesitas saber cuántos espacios tiene en total un arreglo, puedes usar su propiedad `.length` (¡Ojo! a diferencia de los Strings, este `length` no lleva paréntesis al final).
+
+```java
+System.out.println(names.length); // Imprime 3
+```
+
+### 5. "Eliminar" datos (Vaciar un espacio)
+Como el tamaño es fijo, no puedes destruir un compartimento para hacer el arreglo más pequeño. Lo que sí puedes hacer es "vaciarlo" asignándole `null` (si es un objeto o texto) o `0` (si es un número).
+
+```java
+names[2] = null; // El espacio 2 (el tercero) ahora está vacío
+System.out.println(names.length); // Sigue imprimiendo 3, porque el compartimento sigue ahí, solo que vacío.
+```
+
+### 6. Arreglos de otros tipos primitivos
+Puedes crear arreglos de absolutamente cualquier tipo de dato, incluyendo booleanos. Al crearlos sin valores predefinidos, Java los rellena con sus valores por defecto (como `false` para booleanos, o `0` para números).
+
+```java
+boolean[] booleans = new boolean[5];
+System.out.println(booleans[2]); // Imprime false
+```
+
+---
+
+## Listas Dinámicas: ArrayList
+
+A diferencia de los arreglos (Arrays) tradicionales que tienen un tamaño fijo, un `ArrayList` es una lista dinámica. Esto significa que **puede crecer o encogerse automáticamente** a medida que le agregas o le quitas elementos. Es una de las estructuras de datos más utilizadas y flexibles en Java.
+
+> [!NOTE]
+> Para usar un `ArrayList`, primero debes importarlo en la parte superior de tu archivo con: `import java.util.ArrayList;`.
+> Además, los ArrayLists solo pueden guardar "Objetos", por lo que para guardar números o datos primitivos debes usar sus Clases Envolventes o *Wrappers* (ej. `Integer` en lugar de `int`, `Boolean` en lugar de `boolean`, `Double` en lugar de `double`).
+
+### 1. Declaración y Creación
+Se especifica el tipo de dato que va a guardar entre símbolos de mayor y menor `< >` (Diamante).
+
+```java
+// Forma 1: Tradicional
+ArrayList<String> names = new ArrayList<String>();
+
+// Forma 2: Usando var (Inferencia de tipos) y Wrapper (Integer)
+var numbers = new ArrayList<Integer>();
+```
+
+### 2. Conocer su tamaño (`size()`)
+A diferencia de los arrays que usan la propiedad `.length`, los ArrayLists usan el método `.size()`.
+
+```java
+System.out.println(names.size()); // Imprime 0 al inicio
+```
+
+### 3. Añadir elementos (`add()`)
+Agrega elementos, por defecto al final de la lista. Su tamaño crecerá automáticamente.
+
+```java
+names.add("oziel");
+names.add("perez");
+names.add("martinez");
+System.out.println(names.size()); // Ahora imprime 3
+```
+
+### 4. Acceder a los elementos (`get()`)
+No se usan corchetes `[]` para leer datos. Se utiliza el método `.get(índice)`.
+
+```java
+System.out.println(names.get(0)); // Imprime "oziel" (para acceder a un dato en concreto)
+System.out.println(names.get(1)); // Imprime "perez"
+
+// En versiones modernas de Java también puedes usar:
+System.out.println(names.getFirst()); // Te da el primer dato de la lista
+System.out.println(names.getLast());  // Te da el último dato de la lista
+```
+
+### 5. Modificar elementos (`set()`)
+Reemplaza el valor que existe en un índice específico por uno nuevo.
+
+```java
+names.set(2, "christopher"); // Cambia "martinez" por "christopher" en el índice 2
+System.out.println(names.getLast()); // Imprime "christopher"
+```
+
+### 6. Eliminar elementos (`remove()`)
+Puedes borrar un elemento indicando su índice. **Importante:** Al eliminar un elemento, todos los elementos que estaban a su derecha se recorren automáticamente hacia la izquierda para tapar el hueco, reduciendo el tamaño total.
+
+```java
+names.remove(2); // Elimina a "christopher". La lista se encoge.
+// System.out.println(names.get(2)); // Esto ahora daría error porque el índice 2 ya no existe.
+```
+
+### 7. Buscar elementos (`contains()`)
+Verifica si un valor exacto existe dentro de la lista. Devuelve `true` si lo encuentra o `false` si no.
+
+```java
+System.out.println(names.contains("oziel")); // true
+System.out.println(names.contains("christopher")); // false (porque lo eliminamos arriba)
+```
+
+### 8. Vaciar toda la lista (`clear()`)
+Elimina todos los elementos del ArrayList de un solo golpe, dejándolo completamente vacío.
+
+```java
+names.clear();
+System.out.println(names.size()); // Imprime 0
+```
+
+---
+
+## Conjuntos: HashSet (Sets)
+
+Un `HashSet` (o simplemente *Set* / Conjunto) es una estructura de datos muy especial en Java. A diferencia de las Listas o los Arreglos, **no tiene un orden específico** y su regla de oro es: **¡No acepta elementos duplicados!**
+
+> [!NOTE]
+> Para usarlo, debes importarlo en la parte superior con: `import java.util.HashSet;`.
+> Al igual que el `ArrayList`, usa Clases Envolventes (*Wrappers*) como `Integer` en lugar de primitivos como `int`.
+
+### Características Principales:
+1. **Sin Duplicados:** Si intentas agregar el mismo dato 10 veces, Java solo guardará uno y descartará silenciosamente el resto (sin lanzar errores).
+2. **Sin Orden (Sin Índices):** No hay un elemento `0`, `1` o `2`. Los datos se guardan de manera "desordenada" internamente usando un algoritmo matemático llamado *Hash*.
+3. **Súper Rápido:** Buscar un dato en un `HashSet` (usando `contains`) es increíblemente rápido y óptimo, muchísimo más que buscar en un `ArrayList` gigante.
+
+### 1. Declaración y Creación
+```java
+HashSet<String> names = new HashSet<>();
+var numbers = new HashSet<Integer>();
+```
+
+### 2. Añadir y Tamaño (`add()` y `size()`)
+La forma de añadir elementos y ver el tamaño es idéntica a las Listas.
+```java
+names.add("oziel");
+names.add("Perez");
+names.add("Martinez");
+System.out.println(names.size()); // Imprime 3
+
+// Si intentamos agregar duplicados:
+names.add("oziel");
+names.add("oziel");
+System.out.println(names.size()); // ¡Sigue imprimiendo 3! Ignoró las repeticiones.
+```
+
+### 3. Mostrar los elementos
+Como **no hay índices**, no puedes usar un método como `.get(0)`. Para verlos, normalmente imprimes el conjunto completo o usas un bucle para recorrerlos.
+```java
+System.out.println(names); // Los imprime todos de golpe, pero el orden será aleatorio.
+```
+
+### 4. Buscar datos (`contains()`)
+Esta es la mayor fortaleza del `HashSet`. Es la estructura ideal cuando necesitas comprobar constantemente si algo existe.
+```java
+System.out.println(names.contains("oziel")); // Devuelve true casi instantáneamente
+```
+
+### 5. Eliminar elementos (`remove()`)
+Al no existir índices, para eliminar un elemento tienes que indicarle exactamente **el valor** del dato que quieres borrar.
+```java
+names.remove("oziel"); // Borra "oziel" del conjunto
+```
+
+### 6. Operaciones de Conjuntos (Teoría de Conjuntos Matemática)
+Puedes aplicar la lógica de los Diagramas de Venn con múltiples Sets (ej. `names` y `countries`):
+
+```java
+var countries = new HashSet<String>();
+countries.add("Mexico");
+countries.add("Brazil");
+countries.add("Argentina");
+
+// UNIÓN (Juntar ambos conjuntos)
+names.addAll(countries); 
+// Ahora 'names' tiene sus datos originales MÁS todos los países.
+
+// DIFERENCIA (Restar un conjunto)
+names.removeAll(countries);
+// Elimina de 'names' cualquier dato que pertenezca a 'countries'.
+
+// INTERSECCIÓN (Quedarse solo con lo que tienen en común)
+names.retainAll(countries);
+// Elimina todo de 'names' EXCEPTO los datos que también existan dentro de 'countries'.
+```
