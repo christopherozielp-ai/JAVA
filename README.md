@@ -584,3 +584,103 @@ names.removeAll(countries);
 names.retainAll(countries);
 // Elimina todo de 'names' EXCEPTO los datos que también existan dentro de 'countries'.
 ```
+
+---
+
+## Mapas (Diccionarios): HashMap
+
+Un `HashMap` (también conocido como Mapa o Diccionario) es una estructura de datos que **guarda pares de datos**: una **Clave** (*Key*) y un **Valor** (*Value*). Es ideal para cuando necesitas asociar un dato con otro, justo como en un diccionario real donde buscas una palabra (Clave) para encontrar su definición (Valor).
+
+> [!NOTE]
+> Para usarlo, debes importarlo con: `import java.util.HashMap;`.
+> Como guarda pares de datos, al crearlo **siempre debes especificar dos tipos de datos** (Clave, Valor). Recuerda usar Clases Envolventes (*Wrappers*) como `Integer` en lugar de `int`.
+
+### 1. Declaración y Creación
+```java
+// Forma 1: Tradicional (Clave: String, Valor: String)
+HashMap<String, String> names = new HashMap<>();
+
+// Forma 2: Usando var (Clave: Integer, Valor: String)
+var numbers = new HashMap<Integer, String>();
+```
+
+### 2. Añadir elementos (`put()`)
+A diferencia de las listas y los sets que usan `add()`, los mapas usan el método `.put(clave, valor)`.
+**Importante:** Las claves deben ser únicas. Si haces un `put` usando una clave que ya existe, su valor anterior será sobreescrito por el nuevo.
+
+```java
+names.put("Oziel", "christopherozielp@gmail.com");
+names.put("perez", "christopherozielp@gmail.com");
+System.out.println(names.size()); // Imprime 2
+```
+
+### 3. Acceder a los elementos (`get()`)
+Para obtener un valor, no usas índices (0, 1, 2). En su lugar, le pides al mapa que te devuelva el valor asociado a una **Clave** específica.
+
+```java
+System.out.println(names.get("Oziel")); // Devuelve: "christopherozielp@gmail.com"
+```
+
+### 4. Verificar elementos (`containsKey()` y `containsValue()`)
+Puedes preguntarle al mapa si ya tiene guardada una clave específica, o si tiene guardado un valor específico en algún lado.
+
+```java
+// Buscar por Clave (Es súper rápido y eficiente)
+System.out.println(names.containsKey("Oziel")); // Devuelve true
+System.out.println(names.containsKey("pe"));    // Devuelve false
+
+// Buscar por Valor (Es más lento, ya que tiene que revisar todos los valores uno por uno)
+System.out.println(names.containsValue("christopherozielp@gmail.com")); // Devuelve true
+```
+
+### 5. Eliminar elementos (`remove()`)
+Le indicas al mapa cuál **Clave** quieres borrar, y eliminará el par completo (la clave y su valor asociado).
+
+```java
+names.remove("Oziel"); // Elimina por completo el registro de "Oziel"
+System.out.println(names.size()); // Ahora será 1
+```
+
+### 6. Vaciar todo el Mapa (`clear()`)
+Al igual que con las listas, elimina absolutamente todo lo que esté guardado en el mapa, dejándolo vacío y con tamaño 0.
+
+```java
+names.clear();
+System.out.println(names); // Imprime "{}" que significa mapa vacío
+```
+
+### 7. Modificar y Reemplazar elementos (`put()`, `replace()` y `putIfAbsent()`)
+Existen distintas maneras de modificar valores según tus necesidades:
+
++ **Reescribir con `put()`**: Si la clave ya existe, sustituye el valor antiguo. Si no existe, crea la entrada nueva.
++ **Reemplazar solo si existe con `replace()`**: Modifica el valor **únicamente si la clave ya existía** en el mapa.
++ **Insertar solo si no existe con `putIfAbsent()`**: Agrega la clave y su valor **solo si la clave no existía previamente**.
+
+```java
+// Sobrescribe el valor guardado para la clave "perez"
+names.put("perez", "oziel@gmail.com"); 
+
+// Reemplaza el valor de "perez" solo porque la clave "perez" ya existe
+names.replace("perez", "perez@gmail.com"); 
+
+// Agrega "martinez" únicamente si no existía antes en el mapa
+names.putIfAbsent("martinez", "perez@gmail.com"); 
+```
+
+### 8. Comprobar si el mapa está vacío (`isEmpty()`)
+Retorna `true` si el mapa está completamente vacío (tamaño 0) y `false` si tiene al menos un par clave-valor.
+
+```java
+// Comprueba si el mapa no tiene elementos
+boolean vacio = names.isEmpty(); // Devuelve true o false
+System.out.println(vacio);
+```
+
+### 9. Obtener la colección de valores (`values()`)
+Extrae únicamente los **valores** almacenados en el mapa (descartando las claves), devolviendo una colección (`Collection`).
+
+```java
+// Obtiene solo la lista/colección de todos los valores almacenados
+var values = names.values();
+System.out.println(values); // Imprime la lista de valores
+```
