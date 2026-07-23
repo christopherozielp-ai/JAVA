@@ -37,12 +37,12 @@ public class Maps {
 
         //Modificar eleemntos
         names.put("perez", "christopherozielp@gmail.com");
-        System.out.println(names);;
+        System.out.println(names);
 
         names.put("perez", "oziel@gmail.com");
         System.out.println(names);
 
-        names.replace("oziel", "perez@gmail.com");
+        names.replace("perez", "perez@gmail.com");
         System.out.println(names);
 
         names.putIfAbsent("martinez", "perez@gmail.com");
