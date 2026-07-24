@@ -684,3 +684,135 @@ Extrae únicamente los **valores** almacenados en el mapa (descartando las clave
 var values = names.values();
 System.out.println(values); // Imprime la lista de valores
 ```
+
+---
+
+## Bucles (Ciclos / Loops)
+
+Los bucles son estructuras que nos permiten repetir un bloque de código múltiples veces. Son fundamentales para procesar colecciones de datos (como Arreglos o Listas) o para ejecutar una tarea hasta que se cumpla una condición específica.
+
+### 1. Bucle `for`
+El bucle `for` es perfecto para tareas donde **conoces exactamente cuántas veces** quieres que se ejecute la acción. Es ideal para recorrer elementos de un arreglo por sus posiciones.
+Se compone de tres partes:
+- **Inicialización:** Se declara la variable de control (ej. `int i = 0`).
+- **Condición:** Hasta cuándo debe repetirse (ej. `i < 5`).
+- **Incremento/Decremento:** Cómo avanza en cada paso (ej. `i++`).
+
+**Ejemplo en Java:**
+```java
+for (int i = 0; i <= 5; i++) {
+    System.out.println("HOLA JAVA");
+    /*el bucle for es perfecto para tareas 
+    de ejecucion de una accion de un numero exacto de veces
+    , recorrer elementos de un array o lista,
+    aplicar opreraciones secunciales como contar, imprimir, procesar datos */
+}
+
+String[] names = {"oziel", "perez", "martinez", "mario"};
+for (int index = 0; index < names.length; index++){
+    System.out.println(names[index]);
+}
+```
+
+### 2. Bucle `for-each`
+El `for-each` es una versión simplificada del `for`. Se enfoca en **qué** se quiere recorrer, y no en **cómo** hacerlo. Es la opción perfecta cuando necesitas procesar *todos* los elementos de una colección (como un `HashSet` o un Arreglo) sin preocuparte por los índices o las posiciones.
+
+**Ejemplo en Java:**
+```java
+// Recorrer un Arreglo
+for (String name : names) {
+    System.out.println(name);
+}
+
+// Recorrer un HashSet
+HashSet<Integer> numbers = new HashSet<>();
+numbers.add(1);
+numbers.add(2);
+numbers.add(3);
+numbers.add(4);
+numbers.add(5);
+
+for (Integer number : numbers) {
+    System.out.println(number);
+}
+
+// Recorrer un HashMap (por pares Clave/Valor)
+HashMap<String, String> emails = new HashMap<>();
+emails.put("oziel", "chrsitopherozielp@gmail.com");
+emails.put("perez", "perez@gmail.com");
+emails.put("mario", "mario@gmail.com");
+
+for (Map.Entry<String, String> email : emails.entrySet()) {
+    System.out.println(email.getKey());
+    System.out.println(email.getValue());
+}
+```
+
+### 3. Bucle `while`
+El bucle `while` se utiliza cuando **no sabes cuántas veces** se va a repetir el ciclo, pero sabes **bajo qué condición** debe seguir funcionando. Primero verifica la condición, y si es verdadera, ejecuta el código. (Por lo tanto, podría no ejecutarse ni siquiera una vez si la condición es falsa de inicio).
+
+**Ejemplo en Java:**
+```java
+int index = 0;
+while (index < 5) {
+    System.out.println("HOLA OZIEL");
+    index++; // ¡Importante avanzar para evitar un bucle infinito!
+}
+
+// Usando lógica con múltiples condiciones (ej. detenerse al encontrar un dato o al límite del arreglo)
+index = 0;
+boolean find = false;
+while (!find && index < names.length) {
+    System.out.println(names[index]);
+    if (names[index].equals("juan")) {
+        find = true; // Cuando lo encontramos, cambiamos la condición
+    }
+    index++;
+}
+```
+
+### 4. Bucle `do-while`
+El `do-while` es único porque **SIEMPRE ejecuta su bloque de código por lo menos una vez**, incluso si la condición es falsa desde el principio. 
+*(Analogía: Es como dar el primer bocado a una comida antes de decidir si te gusta y quieres seguir comiendo).*
+
+**Ejemplo en Java:**
+```java
+// La condición es falsa desde el inicio (0 no es menor que 0), 
+// pero imprimirá "HOLA JAVA" una sola vez.
+int index = 0;
+do {
+    System.out.println("HOLA JAVA");
+    index++;
+} while (index < 0); 
+```
+
+### 5. Control de Bucles (`break` y `continue`)
+A veces necesitamos alterar el flujo natural de un bucle a la mitad de su ejecución.
+
+#### `break` (Freno de Emergencia)
+Al ejecutar el `break`, el bucle se **detiene por completo** e inmediatamente, saliendo de él.
+*(Analogía: Es como tirar del freno de emergencia en un tren. No importa cuántas estaciones falten, el viaje se acaba ahí mismo).*
+
+**Ejemplo en Java:**
+```java
+for (String name : names) {
+    if (name.equals("oziel")) {
+        break; // Detiene el bucle por completo al instante
+    }
+    System.out.println(name);
+}
+```
+
+#### `continue` (Saltar de Canción)
+A diferencia del `break`, el `continue` no destruye el bucle. Solo **salta el resto del código de la iteración actual** y pasa inmediatamente a la siguiente vuelta.
+*(Analogía: Es como estar escuchando una playlist y darle al botón de "siguiente" cuando suena una canción que no te gusta. La música no se apaga, simplemente saltas a la siguiente pista).*
+
+**Ejemplo en Java:**
+```java
+for (int i = 0; i < 20; i++) {
+    if (i == 8) {
+        continue; // Cuando i es 8, se salta la impresión y pasa directamente al 9
+    }
+    System.out.println(i);
+}
+```
