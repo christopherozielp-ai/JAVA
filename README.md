@@ -816,3 +816,90 @@ for (int i = 0; i < 20; i++) {
     System.out.println(i);
 }
 ```
+
+---
+
+## Funciones (Métodos) y Sobrecarga
+
+Las funciones (o métodos en Java) nos permiten agrupar bloques de código para que realicen una tarea específica. Esto evita tener que escribir el mismo código varias veces y mantiene nuestro programa limpio y organizado, dándole una sola responsabilidad a cada bloque.
+
+### 1. Funciones sin parámetros y sin retorno (`void`)
+Son funciones que simplemente ejecutan una acción sin pedirte datos y sin devolverte ningún resultado. Se declaran con la palabra `void` (vacío).
+
+### 2. Funciones con parámetros
+Son funciones que necesitan "ingredientes" para trabajar. Le pasamos variables (parámetros) dentro de los paréntesis para que la función pueda operar con ellas.
+
+### 3. Funciones con retorno (`return`)
+En lugar de usar `void`, le decimos a Java qué tipo de dato nos va a devolver (ej. `boolean`, `int`, `String`). Esta función procesa información y te devuelve un resultado que puedes guardar en una variable usando la palabra clave `return`. Cuando el programa lee el `return`, sale de la función inmediatamente.
+
+### 4. Sobrecarga de Funciones (Overloading)
+La sobrecarga ocurre cuando tenemos **varias funciones con exactamente el mismo nombre**, pero que reciben **diferentes parámetros** (ya sea diferente cantidad o diferente tipo de datos). Java es lo suficientemente inteligente para saber cuál de todas las versiones ejecutar dependiendo de los ingredientes que le pases al llamarla.
+*(Ojo: La sobrecarga **no** funciona si solo cambias el tipo de dato de retorno; los parámetros deben ser a fuerza diferentes).*
+
+### Buenas Prácticas
+*   **Nombres claros:** Los métodos deben describir exactamente lo que hacen (ej. `sendEmailToUsers` en vez de solo `send`).
+*   **Una sola función concreta:** Un método debe hacer una sola cosa específica. Si hace demasiadas cosas, lo mejor es dividirlo en funciones más pequeñas.
+*   **Modularidad:** Úsalas para evitar copiar y pegar el mismo código en tu método `main`.
+
+### Ejemplo Completo en Java:
+
+```java
+package com.chris.cursos;
+
+public class Funciones {
+    public static void main(String[] args){
+        // Llamando a una función varias veces dentro de un ciclo
+        for (int index = 0; index < 5; index++){
+            sendEmail();
+        }
+        
+        // ==========================================
+        // Probando la SOBRECARGA de funciones 
+        // (Tienen el mismo nombre, pero comportamiento diferente según los parámetros)
+        // ==========================================
+        sendEmailToUsers("oziel@gmail.com"); 
+        sendEmailToUsers("oziel@gmail.com", "Oziel");
+        sendEmailToUsers(new String[]{"oziel", "perez"}); // Pasando un arreglo de Strings
+        
+        // ==========================================
+        // Probando funciones con RETORNO
+        // ==========================================
+        var state = sendEmailWithState("ozielp@gmail.com");
+        System.out.println("Estado del envío: " + state);
+
+        System.out.println("Estado del envío vacío: " + sendEmailWithState(""));
+    }
+
+    // 1. Funciones sin parámetro ni retorno (void)
+    public static void sendEmail(){
+        System.out.println("Se envía el gmail");
+    }
+
+    // 2. Funciones con parámetros (1 parámetro String)
+    public static void sendEmailToUsers(String email){
+        System.out.println("Se envió el email a " + email);
+    }
+    
+    // SOBRECARGA: Mismo nombre, pero con 2 parámetros String
+    public static void sendEmailToUsers(String email, String name){
+        System.out.println("Se envió el email a " + name + " con el correo " + email);
+    }
+
+    // SOBRECARGA: Mismo nombre, pero recibe un Arreglo de Strings
+    public static void sendEmailToUsers(String[] emails){
+        for (String email : emails){
+            System.out.println("Se envió el email a " + email);
+        }            
+    }
+
+    // 3. Funciones con RETORNO (devuelve un boolean en lugar de ser void)
+    public static boolean sendEmailWithState(String email){
+        // Si el correo está vacío, detiene la función y devuelve falso
+        if (email.isEmpty()){
+            return false;
+        }
+        System.out.println("Se ha enviado el gmail a " + email);
+        return true; // Si llega hasta aquí, devuelve verdadero
+    }
+}
+```
