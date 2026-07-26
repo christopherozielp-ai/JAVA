@@ -1,5 +1,7 @@
 package com.chris.cursos;
 
+import java.util.ArrayList;
+
 public class Ejercicio7 {
     public static void main(String[] args){
         bienvenida("Oziel");
@@ -8,6 +10,12 @@ public class Ejercicio7 {
         System.out.println("El número 5 " + par_inpar(5)); 
         System.out.println(age(18));
         System.out.println(longi("oziel"));
+        medida(new int[]{10, 20, 30});
+        System.out.println(medida(new int[]{10, 20, 30}));
+        System.out.println(factorial(18));
+        ArrayList<String> nombres = new ArrayList<>();
+        nombres.add("Oziel");
+        System.out.println(reco(nombres));
     }
     // 1. Crea una funciÃ³n que imprima "Â¡Te doy la bienvenida al curso de Java desde
         // cero!".
@@ -48,10 +56,28 @@ public class Ejercicio7 {
         }
         // 8. Crea un mÃ©todo que reciba un array de enteros, calcula su media y lo
         // retorna.
-        
+        public static int medida(int[] numeros){
+            int suma = 0;
+            for (int n : numeros){
+                suma = suma +n;
+            }
+            return suma / numeros.length;
+        }
         // 9. Escribe un mÃ©todo que reciba un nÃºmero y retorna su factorial.
-
+        public static int factorial(int num){
+            int total = 1;
+            for (int f = 1; f <= num; f++){
+                total = total * f;
+            }
+            return total;
+        }
         // 10. Crea una funciÃ³n que reciba un ArrayList<String> y lo recorra mostrando
         // cada elemento.
-    
+        public static ArrayList<String> reco(ArrayList<String> miLista){
+            ArrayList<String> saludosTerminados = new ArrayList<>();
+            for (String miLitas : miLista){
+                saludosTerminados.add("Hola " + miLitas + " ¿cómo estás?");
+        } 
+        return saludosTerminados;
+    }
 }
