@@ -903,3 +903,75 @@ public class Funciones {
     }
 }
 ```
+
+---
+
+## Programación Orientada a Objetos (POO / OOP)
+
+La Programación Orientada a Objetos es un paradigma que nos permite estructurar el código basándonos en entidades del mundo real mediante **Clases** y **Objetos**.
+
+*(Analogía: Piensa en una **Clase** como el plano arquitectónico o molde de una galleta, y en el **Objeto** como la casa ya construida o la galleta real horneada con ese molde).*
+
+---
+
+### 1. Definición de una Clase (`Persona.java`)
+
+Una clase define la estructura (características/atributos) y los comportamientos (métodos) que tendrán los objetos creados a partir de ella.
+
+```java
+package p.o.o;
+
+public class Persona {
+    
+    // Atributos (características o estado del objeto)
+    String name;
+    int age;
+
+    // Constructor de la clase (método especial para inicializar el objeto)
+    public Persona(String name, int age) {
+        this.name = name; // 'this.name' se refiere al atributo, 'name' al parámetro
+        this.age = age;
+    }
+
+    // Métodos (comportamientos o acciones que realiza el objeto)
+    public void saludo() {
+        System.out.println(" Hola soy " + name + " y tengo " + age + " años ");
+    }
+}
+```
+
+#### Conceptos Clave:
+*   **Atributos:** Son las variables internas que guardan la información del objeto (`name`, `age`).
+*   **Constructor (`Persona(...)`):** Se llama automáticamente al crear el objeto con `new`. Sirve para asignar los valores iniciales.
+*   **La palabra clave `this`:** Resuelve la ambigüedad cuando el parámetro del constructor se llama exactamente igual que el atributo de la clase. `this.name` indica "el atributo `name` de esta instancia".
+*   **Método (`saludo()`):** Define lo que el objeto puede hacer utilizando sus propios atributos.
+
+---
+
+### 2. Creación e Instanciación de Objetos (`Poo.java`)
+
+Para usar una clase, creamos instancias (objetos) de ella en nuestro programa principal.
+
+```java
+package p.o.o;
+
+public class Poo {
+    public static void main(String[] args) {
+
+        // Instanciación del objeto 'Persona' usando el constructor
+        var Personal = new Persona("oziel", 19);
+
+        // Llamada al método del objeto
+        Personal.saludo();
+    }
+}
+```
+
+---
+
+### 💡 Consejos de Senior Dev (Code Review)
+
+1.  **Encapsulamiento (`private`):**
+    En `Persona.java`, los atributos `name` y `age` tienen acceso por defecto (*package-private*). En un entorno profesional, es buena práctica declararlos como `private` para proteger los datos y acceder a ellos mediante métodos `getter` y `setter`.
+2.  **Convenciones de nombres (camelCase):**
+    En `Poo.java`, la variable `Personal` inicia con mayúscula. En Java, las variables y nombres de objetos deben usar **camelCase** (ej. `personal` o `persona` con minúscula inicial) para no confundirlas con nombres de Clases.
