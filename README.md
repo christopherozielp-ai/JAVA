@@ -975,3 +975,387 @@ public class Poo {
     En `Persona.java`, los atributos `name` y `age` tienen acceso por defecto (*package-private*). En un entorno profesional, es buena práctica declararlos como `private` para proteger los datos y acceder a ellos mediante métodos `getter` y `setter`.
 2.  **Convenciones de nombres (camelCase):**
     En `Poo.java`, la variable `Personal` inicia con mayúscula. En Java, las variables y nombres de objetos deben usar **camelCase** (ej. `personal` o `persona` con minúscula inicial) para no confundirlas con nombres de Clases.
+
+---
+
+## Encapsulamiento y Modificadores de Acceso
+
+El **encapsulamiento** es un pilar fundamental de la Programación Orientada a Objetos (POO). Consiste en proteger los datos internos de un objeto y controlar cómo pueden ser accedidos o modificados desde otras partes del programa. Para conseguirlo, utilizamos **modificadores de acceso**.
+
+Sin encapsulamiento, cualquier parte del programa podría acceder directamente a los datos internos, lo que puede provocar errores. Usar modificadores permite:
+* Proteger la integridad de los datos.
+* Evitar comportamientos no deseados o modificaciones accidentales.
+* Preparar el código para ser más robusto y mantenible.
+
+### Tipos de Modificadores de Acceso:
+* **`private` (Privado)**: El nivel más estricto de protección. Solo la propia clase donde se definió la variable puede acceder a ella. Como la caja fuerte de un banco.
+* **`protected` (Protegido)**: Las clases que estén en el mismo paquete o las clases "hijas" (por herencia) pueden acceder.
+* **(default / sin modificador)**: Accesible solo para las clases que estén dentro de la misma carpeta/paquete.
+* **`public` (Público)**: Cualquier parte de tu programa puede acceder. (¡Generalmente no es buena idea usarlo para atributos por seguridad!).
+
+### Getters y Setters
+Son métodos `public` que actúan como "puertas de seguridad" o "ventanillas" para interactuar con los datos que son `private`.
+* **Getter**: Nos permite **leer** u obtener el valor del atributo (te digo cuánto dinero hay, pero no te dejo tocarlo).
+* **Setter**: Nos permite **modificar** el valor del atributo, pero con la gran ventaja de que podemos aplicar reglas y validaciones lógicas antes de permitir el cambio (ej. no puedes depositar saldo negativo).
+
+### Ejemplo Práctico (`Modicadores_Acceso.java`)
+
+```java
+package p.o.o;
+
+// Clase de ejemplo para mostrar encapsulamiento y modificadores
+class CuentaBancaria {
+    // 1. PRIVATE: Solo esta clase puede ver y modificar el saldo.
+    private double saldo;
+
+    // 2. PROTECTED: Clases en el mismo paquete o hijas pueden acceder.
+    protected String tipoDeCuenta;
+
+    // 3. PUBLIC: Cualquier parte del programa puede acceder (solo como ejemplo).
+    public String titular;
+
+    public CuentaBancaria(String titular, String tipoDeCuenta) {
+        this.titular = titular;
+        this.tipoDeCuenta = tipoDeCuenta;
+        this.saldo = 0.0;
+    }
+
+    // --- GETTERS y SETTERS ---
+
+    // Getter: Nos permite "leer" el valor de saldo de forma controlada.
+    public double getSaldo() {
+        return saldo;
+    }
+
+    // Setter: Nos permite cambiar el saldo, APLICANDO REGLAS.
+    public void depositar(double cantidad) {
+        if (cantidad > 0) {
+            saldo += cantidad;
+            System.out.println("Depósito exitoso de: $" + cantidad);
+        } else {
+            System.out.println("Error: No puedes depositar cantidades negativas.");
+        }
+    }
+}
+
+public class Modicadores_Acceso {
+    public static void main(String[] args){
+        CuentaBancaria miCuenta = new CuentaBancaria("Oziel", "Ahorro");
+
+        // Acceso PUBLIC y PROTECTED funcionan bien aquí:
+        System.out.println("Titular: " + miCuenta.titular);
+        System.out.println("Tipo: " + miCuenta.tipoDeCuenta);
+
+        // Acceso PRIVATE: miCuenta.saldo = 1000000; // ¡ERROR DE COMPILACIÓN!
+
+        // Usando las "ventanillas" correctas:
+        miCuenta.depositar(500); // Funciona bien
+        miCuenta.depositar(-100); // Se bloquea gracias a la validación del setter
+        
+        System.out.println("Mi saldo actual es: $" + miCuenta.getSaldo());
+    }
+}
+```
+
+---
+
+## Ejercicios Prácticos de POO
+
+A continuación se presentan los ejercicios resueltos aplicando los conceptos de Programación Orientada a Objetos (Clases, Objetos, Encapsulamiento, y Métodos).
+
+### Clase `Person`
+```java
+package p.o.o;
+import java.util.Scanner;
+
+public class Person {
+
+    private String name ;
+    private int age;
+
+    public Person(String name, int age){
+        this.name = name;
+        this.age = age; 
+    }
+
+    public String getName(){
+        System.out.println("Tu nombre es : " + name);
+        return name;
+    }
+
+    public void setName(String name){
+        Scanner vaiper  = new Scanner(System.in);
+        System.out.println("¿Quieres cambiar tu nombre? si o no");
+        String respuesta = vaiper.nextLine();
+        if (respuesta.equalsIgnoreCase("si")) {
+            System.out.println("¿Cual es tu nuevo nombre?");
+            this.name = vaiper.nextLine();
+        }
+        System.out.println("Tu nombre es : " + this.name);
+    }
+
+    public int getAge(){
+        System.out.println("Tu edad es : " + age + " años");
+        return age;
+    }
+
+    public void setAge(int age){
+        Scanner vaiper = new Scanner(System.in);
+        System.out.println("¿Quieres cambiar tu edad? si o no");
+        String respuesta = vaiper.nextLine();
+        if (respuesta.equalsIgnoreCase("si")) {
+            System.out.println("¿Cual es tu nueva edad?");
+            this.age = vaiper.nextInt();
+        }
+        System.out.println("Tu edad es : " + this.age);
+    }
+}
+```
+
+### Clase `Product`
+```java
+package p.o.o;
+import java.util.Scanner;
+
+public class Product {
+    double price;
+
+    public Product(double price){
+        this.price = price;
+    }
+
+    public void setPrice(double price){
+        Scanner precio = new Scanner(System.in);
+        System.out.println("¿Ingresa el precio del producto?");
+        double newPrice = precio.nextDouble();
+        if (newPrice>0){
+            System.out.println("El precio del producto es: " + newPrice);
+        } 
+        else {
+            System.out.println("El precio no puede ser menor o igual a 0");
+        }
+    }
+}
+```
+
+### Clase `User`
+```java
+package p.o.o;
+import java.util.Scanner;
+
+public class User {
+
+    private String username;
+    private String password;
+
+    public User(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
+    
+    public void setUsername(String username){
+        Scanner vaiper = new Scanner(System.in);
+        System.out.println("Ingresa tu username");
+        this.username = vaiper.nextLine();
+    }
+
+    public String getUsername(){
+        return this.username;
+    }
+
+    public void setPassword(String password){
+        Scanner vaiper = new Scanner(System.in);
+        System.out.println("Ingresa tu password");
+        this.password = vaiper.nextLine();
+    }
+
+    public String getPassword(){
+        return this.password;
+    }
+
+    public String checkPassword(String inputPassword){
+        if (this.password == inputPassword){
+            return "Correcto";
+        }else{
+            return "Incorrecto";
+        }
+    }
+}
+```
+
+### Clase `Employee`
+```java
+package p.o.o;
+
+public class Employee {
+
+    private double salary;
+
+    public Employee(double salary){
+        this.salary = salary;
+    }
+
+    public void raiseSalary(double percent){
+        if (percent < 0) {
+            System.out.println("El aumento no puede ser menor o igual a 0");
+        }
+        else{
+            this.salary = salary + (salary * percent / 100);
+            System.out.println("El salario se ha aumentado en " + percent + " a " + this.salary);
+        }
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+}
+```
+
+### Clase `Rectangle`
+```java
+package p.o.o;
+
+public class Rectangle {
+    double area;
+    double base;
+    double perimetro;
+    double altura;
+
+    public Rectangle (double  base, double  altura){
+        this.base=base;
+        this.altura=altura;
+    }
+    public double calcularArea(){
+        area = base *altura;
+        return area;
+    }
+    public double calcularPerimetro(){
+        perimetro = 2 *(base + altura);
+        return  perimetro;
+    }
+    public void mostrarResultados(){
+        System.out.println("el area del rectangulo es: "+calcularArea());
+    }
+}
+```
+
+### Clase `Student`
+```java
+package p.o.o;
+
+public class Student {
+    private int score;
+    private int grade;
+    
+    public Student(int score, int grade){
+        this.score=score;
+        this.grade=grade;
+    }
+    public void setScore(int score){
+        if (this.score >= 60) {
+            System.out.println("El alumno ha aprobado");
+        }else{
+            System.out.println("El alumno ha suspendido");
+        }
+    }
+
+    public int gatGrade(int grade){
+        System.out.println("El alumno esta en " + this.grade + " grado");
+        return grade;
+    }
+}
+```
+
+### Clase `Car`
+```java
+package p.o.o;
+
+public class Car {
+    String model;
+    String brand;
+    private int speed;
+
+    public Car(String model, String brand, int speed){
+        this.brand=brand;
+        this.model=model;
+        this.speed = speed;
+    }
+
+    public void showDataCar(){
+        System.out.println("La marca de carro es " + model + " y el modelos " + brand);
+    }
+
+    public void accelerate(int amount){
+        speed += amount;
+        if(speed>120){
+            speed = 120;
+        }
+    }
+    public void brake(int amount){
+        speed -= amount;
+        if(speed<0){
+            speed = 0;
+        }
+    }
+    public int getSpeed(){
+        return speed;
+    }
+}
+```
+
+### Clase Main: `Ejercicio2`
+```java
+package p.o.o;
+
+public class Ejercicio2 {
+    public static void main(String[] args){
+        var persona = new Person ("oziel", 15);
+        persona.getName();
+        persona.setName("");
+        persona.getAge();
+        persona.setAge(0);
+        
+        var producto = new Product(0.0);
+        producto.setPrice(0.0);
+        
+        var cuenta = new BankAccount(12.56);
+        cuenta.deposit(0.0);
+        cuenta.withdraw(0.0);
+        
+        var libro = new Book("Conde Cero", "William Gibson");
+        System.out.println(libro.geyTitle());
+        
+        var temperatura = new Temperature(10);
+        temperatura.setCelsuis(20);
+
+        var usuario = new User("oziel", "ozi");
+        usuario.setUsername("");
+        usuario.setPassword("");
+        System.out.println(usuario.checkPassword("ozi"));
+        System.out.println(usuario.getUsername());
+        System.out.println(usuario.getPassword());
+
+        var empleado = new Employee(1000.0);
+        empleado.raiseSalary(10.0);
+        System.out.println(empleado.getSalary());
+
+        var rectangulo = new Rectangle(1.5, 1.5);
+        rectangulo.calcularArea();
+        rectangulo.mostrarResultados();
+
+        var estudiante = new Student(40,5);
+        estudiante.setScore(80);
+        estudiante.gatGrade(5);
+        
+        var carro = new Car("Seat", "Leon", 120);
+        carro.accelerate(10);
+        carro.brake(10);
+        System.out.println("la velocidad del carro es: " + carro.getSpeed());
+        carro.showDataCar();
+    }
+}
+```

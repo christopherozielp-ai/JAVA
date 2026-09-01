@@ -22,7 +22,7 @@ public class Rectangle {
     }
     public void mostrarResultados(){
         System.out.println("el area del rectangulo es: "+calcularArea());
-        System.out.println("el perimetro del rectangulo es: "+calcularPerimetro());
+        //System.out.println("el perimetro del rectangulo es: "+calcularPerimetro());
     }
 }
 
