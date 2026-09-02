@@ -1059,6 +1059,52 @@ public class Modicadores_Acceso {
 
 ---
 
+## Herencia (Inheritance)
+
+La **Herencia** es otro pilar fundamental de la POO. Permite crear nuevas clases (clases "hijas" o subclases) a partir de clases ya existentes (clases "padre" o superclases). 
+
+*(Analogía: Piensa en los vehículos. Un `Coche` y una `Moto` heredan características comunes de un `Vehículo` como tener motor y ruedas, pero cada uno tiene características y comportamientos específicos).*
+
+¿Para qué sirve?
+*   **Reutilizar código:** No tienes que escribir desde cero las mismas propiedades y métodos.
+*   **Organización:** Permite crear una jerarquía lógica.
+
+### Palabras Clave
+*   **`extends`**: Se usa en la declaración de la clase hija para indicar de qué clase padre está heredando.
+*   **`super()`**: Se usa dentro de la clase hija para llamar al constructor o a los métodos de la clase padre.
+*   **`@Override`**: Es una etiqueta (anotación) que indica que estamos sobreescribiendo (modificando) un método que hemos heredado de la clase padre para que funcione de manera diferente en la clase hija.
+
+### Ejemplo de Herencia
+```java
+// Clase Padre
+public class Animal {
+    String nombre;
+    
+    public Animal(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    public void hacerSonido() {
+        System.out.println("El animal hace un sonido genérico");
+    }
+}
+
+// Clase Hija (hereda de Animal)
+public class Perro extends Animal {
+    
+    public Perro(String nombre) {
+        super(nombre); // Llamamos al constructor de Animal
+    }
+    
+    @Override
+    public void hacerSonido() {
+        System.out.println("El perro " + nombre + " ladra: ¡Guau guau!");
+    }
+}
+```
+
+---
+
 ## Ejercicios Prácticos de POO
 
 A continuación se presentan los ejercicios resueltos aplicando los conceptos de Programación Orientada a Objetos (Clases, Objetos, Encapsulamiento, y Métodos).
